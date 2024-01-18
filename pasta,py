@@ -1,0 +1,15 @@
+# separa-arquivo-por-pasta
+para separa o nome do estado tem de estar por padrã em ultimo
+from pathlib import Path
+caminho = Path('Arquivos_Lojas').iterdir()
+import shutil
+if not Path('locais').exists():
+    Path('locais').mkdir()
+else:
+    for lojas in caminho:
+        estado = lojas.stem.split("_")[-1]#separa a cada _ onde pego o ultimo dado
+        
+        if not Path(f'locais/{estado}').exists():
+            Path(f'locais/{estado}').mkdir()
+        if estado in lojas.name:
+                shutil.copy2(lojas, f'locais/{estado}/{lojas.name}')
